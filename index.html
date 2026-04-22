@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <title>Test</title>
+    <link rel="stylesheet" href="css/header.css" type="text/css">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <script src="js/script.js" defer></script> 
+    <script src="js/header.js" defer></script> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+<body>
+  
+  <header>
+  </header>
+  
+
+  <article id="menu-modal" class="hide" onclick="menuModalClick(event)">
+  </article>
+  
+  <nav>
+    <div id="nav-exam-name" title="exam" onclick="navExamNameClick(this.title)"><span>EXAM</span></div>
+    <div id="nav-exam-year"><span>YEAR</span></div>
+  </nav>
+   
+    
+  <section id="exam-section">
+    <h3>EXAMS</h3>
+  <div id="exam">
+  </div>
+  
+  <div id="exam-detail" class="hide">
+    <img>
+  </div>
+  </section>
+  
+  
+  <section id="test-section">
+    <h3>TESTS</h3>
+    <div id="year-filter">
+      <div id="select-year">
+      </div>
+      <button id="filter" type="button" onclick="openFilterModal()">
+        Filters<img src="icons/filter_list.svg">
+      </button>
+    </div>
+    <div id="filter-modal">
+        <div id="filter-type">
+          <div id="reset-filter">Reset</div>
+          <div id="sort-by">Sort By</div>
+          <div id="eval-stat">Evaluation</div>
+          <div id="years">Year</div>
+          <div id="shift">Shift</div>
+          <div id="session">Session</div>
+        </div>
+        <div id="filter-options">
+          <div id="sort-by-options">
+            <label>
+            <input type="radio" name="sort" value="dsc" checked>Year (new to old)
+            </label>
+            <label>
+            <input type="radio" name="sort" value="asc">Year (old to new)
+            </label>
+          </div>
+          <div id="eval-stat-options">
+            <label>
+            <input type="checkbox" name="au" value="attempt" checked>Attempted
+            </label>
+            <label>
+            <input type="checkbox" name="au" value="unattempt" checked>Unattempted
+            </label>
+          </div>
+          <div id="years-options">
+            <label><input type="checkbox" name="yf" value="all" checked>All</label>
+          </div>
+          <div id="shift-options">
+            <label>
+            <input type="checkbox" name="shift" value="01" checked>Ist
+            </label>
+            <label>
+            <input type="checkbox" name="shift" value="02" checked>IInd
+            </label>
+          </div>
+          <div id="session-options">
+            <label>
+            <input type="checkbox" name="session" value="01" checked>First
+            </label>
+            <label>
+            <input type="checkbox" name="session" value="02" checked>Second
+            </label>
+          </div>
+        </div>
+      </div>
+    <div id="test">
+    </div>
+  </section>
+  
+  
+  <footer>
+    <p>Copyright — © 2025 Test.</p>
+    <p>All rights reserved.</p>
+  </footer>
+</body>
+</html>
