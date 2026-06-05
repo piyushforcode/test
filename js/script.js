@@ -9,7 +9,8 @@ const filterOptionsNode = document.getElementById("filter-options");
 const filterTypeNode = document.getElementById("filter-type");
 const filterModalNode = document.getElementById("filter-modal");
 
-const exams = {
+// 
+const EXAMS = {
   jee_mains: ["icons/jee_mains.webp", "icons/jee_mains.webp", "jm"],
   jee_advanced: ["icons/jee_mains.webp", "icons/jee_mains.webp", "ja"],
   neet: ["icons/jee_mains.webp", "icons/jee_mains.webp", "neet"],
@@ -26,7 +27,7 @@ const exams = {
 const ecardColor = 4; //number of var(--ecard) in css
 const testCardDisplayDelay = 0.1; //s
 
-const intro = {
+const INTRO = {
   "3026": ["012201"],
   "3025": ["012201"],
   "3024": ["012701"],
@@ -35,7 +36,7 @@ const intro = {
   "3021": ["022301"],
   "3020": ["010601"]
 }
-let testDate = intro;
+let testDate = INTRO;
 
 // https://raw.githubusercontent.com/pushpiyush/test/refs/heads/main/json/${name}_date.json
 async function getTestDate(name) {
@@ -53,7 +54,7 @@ async function getTestDate(name) {
   }
 }
 
-const monthNames = ["", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTH_NAMES = ["", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function examCard(name, image, num) {
   const name2 = name.replace("_", " ").toUpperCase();
@@ -67,8 +68,8 @@ function examCard(name, image, num) {
 
 function testCard(year, date, num, name="jee_mains") {
   name = "jee_mains";
-  const month = monthNames[(Number(date.slice(0,2)))];
-  const EXAM = `${exams[name][2]}${year}${date}`;
+  const month = MONTH_NAMES[(Number(date.slice(0,2)))];
+  const EXAM = `${EXAMS[name][2]}${year}${date}`;
   /*return `<div class="test-card" style="animation: slidedown 0.3s ${(num-1)*testCardDisplayDelay}s both" onclick="window.location.href='test_preview.html#${EXAM}'">
       <p class="result-preview"></p>
       <p class="test-year">${year}</p>
@@ -90,11 +91,11 @@ function testCard(year, date, num, name="jee_mains") {
     </div>`
 }
 
-function createExamCards(exams) {
+function createExamCards(EXAMS) {
   let el = "";
   let i = 1;
-  for (let name in exams) {
-    el += examCard(name, exams[name][0], i%ecardColor);
+  for (let name in EXAMS) {
+    el += examCard(name, EXAMS[name][0], i%ecardColor);
     i += 1;
   }
   examNode.innerHTML = el;
@@ -126,9 +127,9 @@ const SKELETON = {
   timeoutId4: null,
   
   el: function(text) {
-    const cards = Array(7).fill('<div class="skeleton-test-card"></div>').join('');
+    const CARDS = Array(7).fill('<div class="skeleton-test-card"></div>').join('');
     return `
-      ${cards}
+      ${CARDS}
       <p style="text-align: center; color: var(--ptext); font-size: 14px;">${text}</p>
     `;
   },
@@ -209,7 +210,7 @@ async function openExamDetail(name, his=true) {
 
   examNode.classList.add("hide");
   examDetailNode.classList.remove("hide");
-  examDetailNode.firstElementChild.firstElementChild.setAttribute("src", exams[name][1]);
+  examDetailNode.firstElementChild.firstElementChild.setAttribute("src", EXAMS[name][1]);
   examDetailNode.parentElement.getElementsByTagName("h3")[0].textContent = name.replace("_", " ").toUpperCase();
   document.head.appendChild(style);
   
@@ -260,7 +261,7 @@ if (navEntry.type === 'reload') {
   }
 }
 
-createExamCards(exams);
+createExamCards(EXAMS);
 createTestCards(testDate);
 createYearFilter(testDate);
 createYearOptions(testDate);
@@ -420,7 +421,7 @@ Functions of Test Section
 To create html tags and details for a card
 
 -----createTestCards(test, order="dsc")
-To create all the test cards of given test with testCard function and place then using innerHTML.
+To create all the test CARDS of given test with testCard function and place then using innerHTML.
 It will call testCard()
 
 -----createYearFilter(tests, year=false)
@@ -446,7 +447,7 @@ To create options for Year in #filter-modal.
 
 /*
 ----------------------    TO   DO    ----------------------
-1. Fetching data from server takes time and while those time, the previous-intro test cards are still there. Replace them with skeleton screens with shimmer effect.
+1. Fetching data from server takes time and while those time, the previous-INTRO test CARDS are still there. Replace them with skeleton screens with shimmer effect.
 
 
 

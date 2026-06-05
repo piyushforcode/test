@@ -17,7 +17,7 @@ const reportNode = document.getElementById("report");
 const secDivNode = document.getElementById("sec-div");
 const menuNode = document.getElementById("menu");
 
-const questions = /*JSON.parse(LZString.decompress(sessionStorage.getItem('questions'))) || */qns;
+const questions = JSON.parse(LZString.decompress(sessionStorage.getItem('questions'))) || qns;
 //console.log(questions);
 const mapping = {"physics":"p", "chemistry":"c", "mathematics":"m", "mcq":"a", "numerical":"b"}
 const choice = []; //it contains objects of type {id, response, time} for each question attempted/viewed by the student. response is either option number for mcq or input string for numerical type
@@ -112,6 +112,7 @@ function keyboardinput(id) {
 function displayQuestion(i) {
   const q = questions.find(e => e.id == i);
   currentq = q;
+  console.log(q);
   idNode.innerText = q.id;
   qDivNode.innerHTML = q.question;
   startTime = Date.now();
@@ -120,10 +121,10 @@ function displayQuestion(i) {
   if (q.type == "mcq") {
     nDivNode.style.display = "none";
     oDivNode.style.display = "";
-    console.log([...oDivNode.querySelectorAll("p")]);
-    console.log("pDiv:", pDiv);
-    [...oDivNode.querySelectorAll("p")].forEach((e, index) => {e.innerHTML = `${index}: ${q.options[index]}`; console.log(index, ":", q.options[index]);});
-    if (p && [0,1,2,3].includes(p.response)) {
+   // console.log([...oDivNode.querySelectorAll("p")]);
+  //  console.log("pDiv:", pDiv);
+    [...oDivNode.querySelectorAll("p")].forEach((e, index) => {e.innerHTML = `${index}: ${q.options[index]}`;});
+    if (p && [0,1,2,3].includes(p.response)) {  //console.log(index, ":", q.options[index]);
       res = p.response;
       oDivNode.children[p.response].click();
     } else {
@@ -398,6 +399,7 @@ function getSubjectInitial() {
   const ca = questions.find(e => (e.subject == "chemistry" && e.type == "mcq"))?.id;
   const cb = questions.find(e => (e.subject == "chemistry" && e.type == "numerical"))?.id;
   
+  console.log(ma, mb, pa, pb, ca, cb);
   Object.entries({ ma, mb, pa, pb, ca, cb }).forEach(([name, value]) => {
     document.getElementById(name)?.addEventListener("click", () => {
       updateTime();

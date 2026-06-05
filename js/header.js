@@ -8,13 +8,9 @@ headerNode.innerHTML = `<span class="material-symbols-outlined" id="header-menu"
   <span class="material-symbols-outlined" id="profile" onclick="" title="profile">account_circle</span>
   `;
   
-  /*<img id="header-menu" src="icons/menu.svg" onclick="openMenu()" title="menu">
-  <img id="profile" src="icons/account_circle.svg" title="profile">*/
-  
 menuModalNode.innerHTML = `<div id="menu">
     <div class="option">
       <p>Language</p>
-      <p>en</p>
     </div>
     <div class="option" onclick="openThemeModal()">
       <p>Theme</p>
@@ -22,10 +18,14 @@ menuModalNode.innerHTML = `<div id="menu">
     <div class="option">
       <div>Buy Me A Coffee</div>
     </div>
-    <div class="option last-option" id="menu-about">
-      <p>ABOUT US</p>
-      <p>FAQs</p>
-      <p>T&C</p>
+    <div class="option">
+      <div>FAQs</div>
+    </div>
+    <div class="option">
+      <div>Terms & Conditions</div>
+    </div>
+    <div class="option last-option">
+      <p>About Us</p>
     </div>
     <div id="theme-modal">
       <div class="option" onclick="theme.changeTheme('light')">Light</div>
