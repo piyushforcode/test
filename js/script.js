@@ -50,7 +50,7 @@ async function getTestDate(name) {
       return {}; // don't remove this
     }
   } catch (err) {
-    console.log(`Error in fetching ${name}_date.json: \n`+err.message);
+    console.log(`Error in fetching ${name}_date.json: \n` + err.message);
   }
 }
 
@@ -62,13 +62,13 @@ function examCard(name, image, num) {
     <img src=${image}>
     <h4>${name2}</h4>
   </div>`;
-  
+
   //style="background-color: var(--ecard${num})
 }
 
-function testCard(year, date, num, name="jee_mains") {
+function testCard(year, date, num, name = "jee_mains") {
   name = "jee_mains";
-  const month = MONTH_NAMES[(Number(date.slice(0,2)))];
+  const month = MONTH_NAMES[(Number(date.slice(0, 2)))];
   const EXAM = `${EXAMS[name][2]}${year}${date}`;
   /*return `<div class="test-card" style="animation: slidedown 0.3s ${(num-1)*testCardDisplayDelay}s both" onclick="window.location.href='test_preview.html#${EXAM}'">
       <p class="result-preview"></p>
@@ -77,10 +77,10 @@ function testCard(year, date, num, name="jee_mains") {
       <p class="test-shift">Shift ${date.slice(5)}</p>
       <img src="icons/arrow_right.svg">
     </div>`*/
-  return `<div class="test-card" style="animation: slidedown 0.3s ${(num-1)*testCardDisplayDelay}s both" onclick="window.location.href='test_preview.html#${EXAM}'">
+  return `<div class="test-card" style="animation: slidedown 0.3s ${(num - 1) * testCardDisplayDelay}s both" onclick="window.location.href='test_preview.html#${EXAM}'">
         <div class="test-img"><img src="/icons/jee_mains9.png" style="width: 100%; height: 100%;"></div>
         <div class="test-body">
-          <div class="test-date">${date.slice(2,4)} ${month}</div>
+          <div class="test-date">${date.slice(2, 4)} ${month}</div>
           <div class="test-year">${year}</div>
         </div>
         <div class="result-preview"></div>
@@ -95,24 +95,24 @@ function createExamCards(EXAMS) {
   let el = "";
   let i = 1;
   for (let name in EXAMS) {
-    el += examCard(name, EXAMS[name][0], i%ecardColor);
+    el += examCard(name, EXAMS[name][0], i % ecardColor);
     i += 1;
   }
   examNode.innerHTML = el;
 }
 
-function createTestCards(tests, order="dsc",name = "jee_mains") {
+function createTestCards(tests, order = "dsc", name = "jee_mains") {
   let el = "";
   let yr = "";
   let total = Object.values(tests).reduce((total, arr) => total + arr.length, 0);
   let num = 1; //change it to 4 for asc delay during filtermodal close
   for (let y in tests) {
     tests[y].forEach((v) => {
-      if (order=="dsc") {
+      if (order == "dsc") {
         num = Math.min(total, 20);
-        el =  testCard(y, v, num, name) + el;
+        el = testCard(y, v, num, name) + el;
       } else {
-        el +=  testCard(y, v, num, name);
+        el += testCard(y, v, num, name);
         num += 1;
       }
       total -= 1;
@@ -125,29 +125,29 @@ const SKELETON = {
   pd: "Loading Data ...",
   timeoutId3: null,
   timeoutId4: null,
-  
-  el: function(text) {
+
+  el: function (text) {
     const CARDS = Array(7).fill('<div class="skeleton-test-card"></div>').join('');
     return `
       ${CARDS}
       <p style="text-align: center; color: var(--ptext); font-size: 14px;">${text}</p>
     `;
   },
-  
-  main: function() {
+
+  main: function () {
     testNode.innerHTML = this.el(this.pd);
     this.timeoutId3 = setTimeout(() => {
       this.pd = "Taking longer than usual...";
       testNode.innerHTML = this.el(this.pd);
     }, 3000);
-    
+
     this.timeoutId4 = setTimeout(() => {
       this.pd = "Give a cheers for your patience...";
       testNode.innerHTML = this.el(this.pd);
     }, 10000);
   },
-  
-  clear: function() {
+
+  clear: function () {
     if (this.timeoutId3) {
       clearTimeout(this.timeoutId3);
       this.timeoutId3 = null;
@@ -161,10 +161,10 @@ const SKELETON = {
 };
 
 
-function createYearFilter(tests, year=false) {
+function createYearFilter(tests, year = false) {
   let yr = "";
   for (let y in tests) {
-    if (year && y==year) {
+    if (year && y == year) {
       yr = `<p title="${y}" onclick="selectYearFilter(this.title)" class="active">${y}</p>` + yr;
     } else {
       yr = `<p title="${y}" onclick="selectYearFilter(this.title)">${y}</p>` + yr;
@@ -175,7 +175,7 @@ function createYearFilter(tests, year=false) {
   } else {
     yr = `<p title="Reset" class="reset active" onclick="selectYearFilter(this.title)">Reset</p>` + yr;
   }
-  
+
   selectYearNode.innerHTML = yr;
 }
 
@@ -198,13 +198,13 @@ function changeExamName(name) {
 function navExamNameClick(title) {
   if (title == "exam") {
   } else {
-  /*  //window.location.assign(`index.html#${title}`);
-   history.pushState(null, "", `#${title}`);
-   openExamDetail(title);*/
+    /*  //window.location.assign(`index.html#${title}`);
+     history.pushState(null, "", `#${title}`);
+     openExamDetail(title);*/
   }
 }
 
-async function openExamDetail(name, his=true) {
+async function openExamDetail(name, his = true) {
   const style = document.createElement('style');
   style.textContent = `#exam-section h3::after { background: linear-gradient(to right, transparent, var(--bgcolor), transparent); animation: glint 1.5s ease-in-out forwards; }`;
 
@@ -213,30 +213,30 @@ async function openExamDetail(name, his=true) {
   examDetailNode.firstElementChild.firstElementChild.setAttribute("src", EXAMS[name][1]);
   examDetailNode.parentElement.getElementsByTagName("h3")[0].textContent = name.replace("_", " ").toUpperCase();
   document.head.appendChild(style);
-  
+
   window.addEventListener("popstate", () => {
-      location.reload();
+    location.reload();
   });
   if (his) {
     history.pushState(null, "", `#${name}`);
   }
-  
+
   changeExamName(name);
   SKELETON.main();
-  
+
   console.log(`Fetching data for ${name}`);
   let time = Date.now();
   testDate = await getTestDate(name);
   console.log(`Data Fetched Successfully.\nTime taken: ${Date.now() - time}ms\ntestDate:`, testDate);
   SKELETON.clear();
-  
-  createTestCards(testDate, "dsc" , name);
+
+  createTestCards(testDate, "dsc", name);
   createYearFilter(testDate);
   createYearOptions(testDate);
 }
 
 function selectYearFilter(year) {
-  if (year=="Reset") {
+  if (year == "Reset") {
     createTestCards(testDate);
     createYearFilter(testDate);
     createYearOptions(testDate);
@@ -248,7 +248,7 @@ function selectYearFilter(year) {
       newDate[y] = testDate[y];
     }
   }
-  
+
   createTestCards(newDate);
   createYearFilter(testDate, year);
 }
@@ -271,20 +271,20 @@ function examCardClick(t) {
   let vW = examNode.clientWidth;
   let scrollLeft = examNode.scrollLeft;
   let cardLeft = t.offsetLeft;
-  let currentLeft = cardLeft-scrollLeft;
-  let currentX = currentLeft + cardWidth/2;
-  let moveX = vW/2 - currentX;
-  let reqScaleX = (vW-40)/cardWidth;
-  
+  let currentLeft = cardLeft - scrollLeft;
+  let currentX = currentLeft + cardWidth / 2;
+  let moveX = vW / 2 - currentX;
+  let reqScaleX = (vW - 40) / cardWidth;
+
   t.style.transform = `translateX(${moveX}px) scaleX(${reqScaleX})`;
-  
-  setTimeout(() => {openExamDetail(t.title)}, 250);
+
+  setTimeout(() => { openExamDetail(t.title) }, 250);
 }
 
 const ftcn = filterTypeNode.children;
 ftcn[1].classList.add("active");
 let ticking = false;
-let p =0;
+let p = 0;
 let recentFT = ftcn[1];
 
 filterOptionsNode.addEventListener("scroll", () => {
@@ -292,11 +292,11 @@ filterOptionsNode.addEventListener("scroll", () => {
     requestAnimationFrame(() => {
       let l = Number(filterOptionsNode.scrollLeft.toFixed());
       let w = filterOptionsNode.offsetWidth;
-      let n = Number((l/w).toFixed());
-      if (n>p || n<p) {
+      let n = Number((l / w).toFixed());
+      if (n > p || n < p) {
         recentFT.classList.remove("active");
-        ftcn[n+1].classList.add("active");
-        recentFT = ftcn[n+1];
+        ftcn[n + 1].classList.add("active");
+        recentFT = ftcn[n + 1];
         p = n;
       }
       ticking = false;
@@ -306,11 +306,11 @@ filterOptionsNode.addEventListener("scroll", () => {
 });
 
 Array.from(ftcn).forEach((ch, index) => {
-  if (index==0) {
+  if (index == 0) {
     ch.addEventListener("click", () => {
       filterOptionsNode.scrollTo({
-      left: filterOptionsNode.offsetWidth * (index),
-      behavior: 'smooth'
+        left: filterOptionsNode.offsetWidth * (index),
+        behavior: 'smooth'
       });
       document.querySelectorAll('#filter-options input').forEach(input => {
         input.checked = input.defaultChecked;
@@ -336,26 +336,28 @@ function openFilterModal() {
     applyFilter();
     setTimeout(() => {
       filterNode.innerHTML = `Filter<span class="material-symbols-outlined">filter_list</span>`;
-      filterNode.style.animation = "rotatex-anticlock2 0.2s"}, 200);
+      filterNode.style.animation = "rotatex-anticlock2 0.2s"
+    }, 200);
     filterModalNode.style.maxHeight = "0px";
   } else {
     filterNode.style.animation = "rotatex-clock 0.2s"
     setTimeout(() => {
       filterNode.innerHTML = `Apply<span class="material-symbols-outlined" style="transform: rotate(180deg);">filter_list</span>`;
-      filterNode.style.animation = "rotatex-clock2 0.2s"}, 200);
+      filterNode.style.animation = "rotatex-clock2 0.2s"
+    }, 200);
     filterModalNode.style.maxHeight = "300px";
   }
   filterModalOpen = !filterModalOpen;
 }
 
 function applyFilter() {
-  const sort = Array.from(document.querySelectorAll("input[name=sort]:checked")).map((e) => {return e.value});
-  const evaluated = Array.from(document.querySelectorAll("input[name=au]:checked")).map((e) => {return e.value});
-  const year = Array.from(document.querySelectorAll("input[name=yf]:checked")).map((e) => {return e.value});
-  const shift = Array.from(document.querySelectorAll("input[name=shift]:checked")).map((e) => {return e.value});
-  const session = Array.from(document.querySelectorAll("input[name=session]:checked")).map((e) => {return e.value});
-  
-  
+  const sort = Array.from(document.querySelectorAll("input[name=sort]:checked")).map((e) => { return e.value });
+  const evaluated = Array.from(document.querySelectorAll("input[name=au]:checked")).map((e) => { return e.value });
+  const year = Array.from(document.querySelectorAll("input[name=yf]:checked")).map((e) => { return e.value });
+  const shift = Array.from(document.querySelectorAll("input[name=shift]:checked")).map((e) => { return e.value });
+  const session = Array.from(document.querySelectorAll("input[name=session]:checked")).map((e) => { return e.value });
+
+
   const newDate = {};
   // filtering year
   year.forEach((y) => {
@@ -364,18 +366,18 @@ function applyFilter() {
       //If we do newDate[y] = testDate[y]. newDate[y] will copy the reference and not the value. Hence, any change in newDate[y] will also change testDate[y]
     }
   });
-  
+
   //filtering shift
   for (let d in newDate) {
-  newDate[d] = newDate[d].filter(p => shift.includes(p.slice(4, 6)));
+    newDate[d] = newDate[d].filter(p => shift.includes(p.slice(4, 6)));
   }
-  
+
   //filtering session
- /* for (let d in newDate) {
-  newDate[d] = newDate[d].filter(p => session.includes(p.slice(6, 8)));
-  }
-  */
-  
+  /* for (let d in newDate) {
+   newDate[d] = newDate[d].filter(p => session.includes(p.slice(6, 8)));
+   }
+   */
+
   for (let d in newDate) {
     if (newDate[d].length == 0) {
       delete newDate[d];
@@ -396,22 +398,22 @@ function createYearOptions(test) {
 }
 
 function yearOptionsSelect() {
-    const year = Array.from(document.querySelectorAll("input[name=yf]:checked")).map((e) => {return e.value});
-    const a = document.querySelector("input[name=reset]");
-    if (year.length == Object.keys(testDate).length) {
-      a.checked = true;
-    } else {
-      a.checked = false;
-    }
+  const year = Array.from(document.querySelectorAll("input[name=yf]:checked")).map((e) => { return e.value });
+  const a = document.querySelector("input[name=reset]");
+  if (year.length == Object.keys(testDate).length) {
+    a.checked = true;
+  } else {
+    a.checked = false;
   }
-  
+}
+
 function allYearOptionsSelect(t) {
-    if (t.checked) {
-      Array.from(document.querySelectorAll("input[name=yf]")).forEach((e) => {e.checked = true});
-    } else {
-      Array.from(document.querySelectorAll("input[name=yf]")).forEach((e) => {e.checked = false});
-    }
+  if (t.checked) {
+    Array.from(document.querySelectorAll("input[name=yf]")).forEach((e) => { e.checked = true });
+  } else {
+    Array.from(document.querySelectorAll("input[name=yf]")).forEach((e) => { e.checked = false });
   }
+}
 
 
 /*

@@ -7,7 +7,7 @@ headerNode.innerHTML = `<span class="material-symbols-outlined" id="header-menu"
   <h1 id="header-title" title="test" onclick="window.location.assign('index.html')">PYQ<em>test</em></h1>
   <span class="material-symbols-outlined" id="profile" onclick="" title="profile">account_circle</span>
   `;
-  
+
 menuModalNode.innerHTML = `<div id="menu">
     <div class="option">
       <p>Language</p>
@@ -40,7 +40,7 @@ menuModalNode.innerHTML = `<div id="menu">
       <div class="option" onclick="theme.changeTheme('dark5')">Dark 5</div>
     </div>
   </div>`;
-  
+
 const menuNode = document.getElementById("menu");
 const headerMenuNode = document.getElementById("header-menu");
 const themeModalNode = document.getElementById("theme-modal");
@@ -88,13 +88,13 @@ function menuAnimation() {
 
 const theme = {
   get getTheme() {
-    return localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+    return localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   },
   get newTheme() {
-    return this.getTheme === "dark"?"light":"dark";
+    return this.getTheme === "dark" ? "light" : "dark";
   },
   changeTheme(themeName) {
-    document.documentElement.setAttribute("data-theme" , `${themeName}`);
+    document.documentElement.setAttribute("data-theme", `${themeName}`);
     localStorage.setItem("theme", themeName);
   }
 }

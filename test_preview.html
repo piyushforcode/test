@@ -155,14 +155,14 @@
     </style>
     <script>
       const MONTH = ["", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      const EXAM_LIST = {"jm": "JEE Mains", "ja": "JEE Advanced", "n": "NEET"};
+      const EXAM_LIST = { "jm": "JEE Mains", "ja": "JEE Advanced", "n": "NEET" };
       const EXAM = window.location.hash.substring(1) || "jm2026040802";
       let name = ""
       EXAM.match(/\D/g).forEach((e) => name += e);
-      for (let a in EXAM_LIST) { if (a == name) name = EXAM_LIST[a]};
+      for (let a in EXAM_LIST) { if (a == name) name = EXAM_LIST[a] };
       let year = EXAM.slice(-10, -6);
       let month = MONTH[Number(EXAM.slice(-6, -4))];
-      const EXAM_NAME = `${name} ${EXAM.slice(-4,-2)} ${month} ${year} Shift-${EXAM.slice(-2)}`;
+      const EXAM_NAME = `${name} ${EXAM.slice(-4, -2)} ${month} ${year} Shift-${EXAM.slice(-2)}`;
 
       async function loadData() {
         const buttonNode = document.getElementById("button");
@@ -180,7 +180,7 @@
             time = Date.now();
             const text = await response.text();
             const questions = JSON.parse(text);
-            
+
             sessionStorage.setItem('questions', LZString.compress(JSON.stringify(questions)));
             console.log(`Data Compressed Successfully.\nTime taken: ${Date.now() - time}ms`);
             buttonNode.style.fontWeight = "600";
@@ -191,11 +191,11 @@
             buttonNode.innerText = `Error ${response.value}`;
           }
         } catch (err) {
-          console.log(`Error in fetching ${EXAM}.json: \n`+err.message);
+          console.log(`Error in fetching ${EXAM}.json: \n` + err.message);
           buttonNode.innerText = "Error in Fetching Data";
         }
       }
-      
+
       loadData();
       document.getElementById("e-name").innerText = EXAM_NAME;
       document.getElementById("button").addEventListener("click", () => {
@@ -206,8 +206,8 @@
           window.alert("Please Accept Terms & Condition");
         }
       });
-      
-      
+
+
     </script>
   </body>
 </html>
