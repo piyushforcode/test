@@ -40,7 +40,7 @@ header {
   padding: 3px 6px;
   border: 1px solid;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 500;
   background: #fefefe;
   transition: background 0.2s ease-in-out;
 }
@@ -59,6 +59,9 @@ header {
 /*  position: relative;*/
   /* width: 100%; */
   height: calc(100% - 4em);
+
+  display: flex;
+  flex-direction: column;
 }
 
 #sec-div {
@@ -214,6 +217,12 @@ nav {
   background: #f0f0f0;
 }
 
+#content-div {
+  flex-grow: 1;
+  overflow-y: scroll;
+  padding-bottom: 30px;
+}
+
 #q-num {
   display: flex;
   flex-direction: row;
@@ -252,16 +261,10 @@ nav {
   font-size: 14px;
 }
 
-#content-div {
-  height: calc(100vh - 13.9em - 15px);
-  overflow-y: scroll;
-  padding-bottom: 30px;
-}
-
 #q-div {
   font-size: 1.05rem;
   width: 100%;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 
 #q-div img {
