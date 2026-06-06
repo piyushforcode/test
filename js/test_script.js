@@ -17,7 +17,7 @@ const reportNode = document.getElementById("report");
 const secDivNode = document.getElementById("sec-div");
 const menuNode = document.getElementById("menu");
 
-const questions = JSON.parse(LZString.decompress(sessionStorage.getItem('questions'))) || qns;
+const questions = /*JSON.parse(LZString.decompress(sessionStorage.getItem('questions'))) || */qns;
 //console.log(questions);
 const mapping = { "physics": "p", "chemistry": "c", "mathematics": "m", "mcq": "a", "numerical": "b" }
 const choice = []; //it contains objects of type {id, response, time} for each question attempted/viewed by the student. response is either option number for mcq or input string for numerical type

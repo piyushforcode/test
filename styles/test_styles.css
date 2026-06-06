@@ -8,6 +8,11 @@ html, body {
   overflow-x: hidden;
   position: relative;
   cursor: default;
+  font-family: Google Sans, Noto Sans, Helvetica, Arial, sans-serif;
+}
+
+button {
+  cursor: pointer;
 }
 
 header {
@@ -47,6 +52,7 @@ header {
   border: 1px solid #00009090;
   border-radius: 8px;
   padding: 8px;
+  cursor: pointer;
 }
 
 #main-div {
@@ -198,7 +204,9 @@ nav {
   min-width: 100px;
   border: 0.5px solid ;
   font-size: 11.5px;
-  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   padding: 3px;
 }
 
@@ -267,6 +275,8 @@ nav {
 
 #o-div {
   width: 100%;
+  min-width: fit-content;
+  max-width: 500px;
   padding: 0 20px;
 }
 
@@ -447,7 +457,6 @@ dialog button {
   padding: 5px;
   border-radius: 5px;
   font-size: 0.9em;
-  cursor: pointer;
 }
 
 :disabled {
@@ -478,7 +487,7 @@ dialog button {
 }
 
 /* customization for pc */
-@media screen and (min-width: 200px) {
+@media screen and (min-width: 500px) {
   #menu {display: none;}
   #container {
     /* position: relative; */
@@ -504,5 +513,18 @@ dialog button {
     border: 1px solid black;
     box-shadow: none;
     /* background: #638919; */
+  }
+
+  #subnames > div {
+    font-size: 12.5px;
+  }
+
+  .num-box {
+    width: 40px;
+    height: 40px;
+  }
+
+  #res-button button, #nav-button button {
+    font-size: 0.95em;
   }
 }
