@@ -57,7 +57,7 @@ function stopwatch() {
     if (timer == 599) { timerNode.style.background = "red" }
     if (timer <= 0) {
       clearInterval(intervalId1);
-      //  submit();
+        submit();
     }
   }, 1000);
   timerNode.innerText = `3:00:00`
@@ -80,7 +80,7 @@ function qStopwatch(startTimer = 0) {
       timerNode.innerText = `${displayMin}:${displaySec}`;
     } catch (err) {
       console.log(err);
-      clearInterval(intervalId1);
+      clearInterval(intervalId2);
     }
   }, 1000);
 
@@ -196,18 +196,24 @@ function save() {
 
 function updateTime() {
   const q = choice.find(e => e.id == currentq.id);
+  const timeSpent = Math.round((Date.now() - startTime) / 1000);
   if (q) {
-    q.time += parseInt((Date.now() - startTime) / 1000);
+    q.time += timeSpent;
   } else {
     choice.push({
       id: currentq.id,
       response: null,
-      time: parseInt((Date.now() - startTime) / 1000)
+      time: timeSpent
     })
   }
 
   MENU.toggleCurrentClass(currentq.id);
   if (window.matchMedia("screen and (min-width: 200px)").matches) MENU.updateQuestionBox(currentq.id);
+}
+
+// TODO
+function submit() {
+  window.location.href = "index.html";
 }
 
 // function handleOutsideMenuClick(e) {
@@ -437,6 +443,9 @@ document.getElementById("test-name").innerText = getTestName();
       pDiv = e;
     }
   });
+});
+submitNode.addEventListener("click", () => {
+  document.querySelector("#submit-dialog").showModal();
 });
 saveNode.addEventListener("click", () => {
   save();

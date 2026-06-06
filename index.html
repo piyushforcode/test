@@ -1,57 +1,73 @@
-<html data-theme="light">
+<!DOCTYPE html>
+<html data-theme="dark">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PYQtest</title>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle,close,filter_list,menu&display=block" />
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles/header.css" type="text/css">
     <link rel="stylesheet" href="styles/styles.css" type="text/css">
+    <!-- Scripts -->
     <script src="js/script.js" defer></script> 
     <script src="js/header.js" defer></script> 
+    <script>
+      // Apply saved or default theme on load
+      const THEME_NAME = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", `${THEME_NAME}`);
+    </script>
   </head>
 <body>
   
+  <!-- Main Header -->
   <header>
   </header>
   
-
+  <!-- Mobile Menu Modal 
   <article id="menu-modal" class="hide" onclick="menuModalClick(event)">
-  </article>
+  </article>-->
   
+  <!-- Navigation Breadcrumbs -->
   <nav>
     <div id="nav-exam-name" title="exam" onclick="navExamNameClick(this.title)"><span>EXAM</span></div>
     <div id="nav-exam-year"><span>YEAR</span></div>
   </nav>
    
-    
+  <!-- Exam Selection Section -->  
   <section id="exam-section">
     <h3>EXAMS</h3>
-  <div id="exam">
-  </div>
+    
+    <!-- Exam List -->
+    <div id="exam">
+    </div>
   
-  <div id="exam-detail" class="hide">
-    <span><img></span>
-    <div id="exam-count">
-      <div class="count-card" style="background: var(--brand); border: 1px solid var(--brand)">
-        <div class="val" style="color: var(--bgcolor);">0</div>
-        <div class="lbl" style="color: var(--bgcolor); opacity: 0.8;">Test Attempted</div>
-      </div>
-      <div class="count-card">
-        <div class="val">10</div>
-        <div class="lbl">Tests</div>
-      </div>
-      <div class="count-card">
-        <div class="val">2</div>
-        <div class="lbl">Year</div>
+    <!-- Exam Details & Statistics -->
+    <div id="exam-detail" class="hide">
+      <span><img></span>
+      <div id="exam-count">
+        <div class="count-card" style="background: var(--brand); border: 1px solid var(--brand)">
+          <div class="val" style="color: var(--bgcolor);">0</div>
+          <div class="lbl" style="color: var(--bgcolor); opacity: 0.8;">Test Attempted</div>
+        </div>
+        <div class="count-card">
+          <div class="val">10</div>
+          <div class="lbl">Tests</div>
+        </div>
+        <div class="count-card">
+          <div class="val">2</div>
+          <div class="lbl">Year</div>
+        </div>
       </div>
     </div>
-  </div>
   </section>
   
-  
+  <!-- Tests Section -->
   <section id="test-section">
     <h3>TESTS</h3>
+    
+    <!-- Filters Top Bar -->
     <div id="year-filter">
       <div id="select-year">
       </div>
@@ -59,6 +75,8 @@
         Filter<span class="material-symbols-outlined">filter_list</span>
       </button>
     </div>
+    
+    <!-- Filter Modal Options -->
     <div id="filter-modal">
         <div id="filter-type">
           <div id="reset-filter">Reset</div>
@@ -106,6 +124,8 @@
           </div>
         </div>
       </div>
+      
+    <!-- Tests List Container -->
     <div id="test">
       <div class="test-card">
         <div class="test-img"></div>
@@ -123,10 +143,8 @@
     </div>
   </section>
   
-  
+  <!-- Footer -->
   <footer>
-    <p>© 2025 PYQtest. All rights reserved.</p>
-    <p><img src="https://img.icons8.com/?size=18&id=62856&format=png&color=000000">  @pushpiyush</p>
   </footer>
 </body>
 </html>

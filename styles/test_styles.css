@@ -203,7 +203,7 @@ nav {
 }
 
 .active {
-  background: #dedede;
+  background: #f0f0f0;
 }
 
 #q-num {
@@ -333,7 +333,7 @@ nav {
   border: 1px solid;
   border-radius: 5px;
   padding: 5px;
-  background: #dedede;
+  background: #f0f0f0;
 }
 
 #kbd button {
@@ -379,7 +379,7 @@ nav {
 }
 
 #clear-response {
-  background: #dedede;
+  background: #f0f0f0;
 }
 
 #review {
@@ -397,7 +397,7 @@ nav {
   justify-content: space-between;
   padding: 5px;
   border-top: 1.5px solid;
-  background: #dedede;
+  background: #f0f0f0;
 }
 
 #nav-button div {
@@ -418,9 +418,53 @@ nav {
   color: white;
 }
 
+dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 0; 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  font-size: large;
+}
+
+/* how to animate the closing ? */
+/* Animate the opening */
+dialog[open] {
+  animation: fadeIn 0.3s ease-out;
+}
+
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1px); /* Adds a modern frosted glass effect */
+}
+
+dialog > * {
+  width: 100%;
+  padding: 1rem 2rem;
+}
+
+dialog button {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
 :disabled {
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-20px); }
 }
 
 @keyframes slideLeft {
@@ -433,6 +477,7 @@ nav {
   to {transform: translateX(450px);}
 }
 
+/* customization for pc */
 @media screen and (min-width: 200px) {
   #menu {display: none;}
   #container {

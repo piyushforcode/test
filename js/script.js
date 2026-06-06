@@ -214,9 +214,12 @@ async function openExamDetail(name, his = true) {
   examDetailNode.parentElement.getElementsByTagName("h3")[0].textContent = name.replace("_", " ").toUpperCase();
   document.head.appendChild(style);
 
-  window.addEventListener("popstate", () => {
-    location.reload();
-  });
+  // Check if listener exists to prevent duplicates
+  if (!window.popStateListenerAdded) {
+    window.addEventListener("popstate", () => location.reload());
+    window.popStateListenerAdded = true;
+  }
+
   if (his) {
     history.pushState(null, "", `#${name}`);
   }

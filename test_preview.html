@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1.0">
     <title>TEST PREVIEW</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300italic,400italic,500italic,700italic" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/lz-string/libs/lz-string.min.js"></script>
   </head>
   <body>
@@ -15,7 +16,7 @@
       </select> 
     </header>
     <section>
-      <h4>Please read the instructions carefully</h4>
+      <h3>Please read the instructions carefully</h3>
       <h5>General Instructions:</h5>
       <ol type="1" start="1">
         <li>Total Duration of <span id="e-name"></span> is 180 min.</li>
@@ -70,25 +71,30 @@
     <section>
       <button id="button" type="button">PROCEED</button>
     </section>
+    <footer>
+      <div>Copyright &copy; 2026 PYQtest. All rights reserved.</div>
+    </footer>
     
     <style>
       html, body {
         margin: 0px;
+        /*font-family: Roboto, Arial, sans-serif;*/
+        font-family: sans-serif;
       }
       
       * {
         box-sizing: border-box;
       }
       
-     header {
-       height: 4em;
-       width: 100vw;
-       background: orange;
-       padding: 8px 10px;
-        display: flex;
+      header {
+        width: 100%;
+        background: #f59031;
+        padding: 8px 10px;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        display: flex;
+        height: 4.2em;
       }
       
       h1 {
@@ -109,9 +115,8 @@
         background: white;
       }
       
-      h4 {
+      h3 {
         text-align: center;
-        font-size: 17px;
         color: #000000de;
       }
       
@@ -127,29 +132,44 @@
       }
       
       li, label {
-        color: #000000cc;
+        color: #000000bb;
         font-size: 13px;
       }
       
       button {
         display: block;
-        margin: 10px auto;
+        margin: 10px auto 15px;
         background: #008000cc;
         width: 200px;
         height: 30px;
         border: none;
         color: white;
         font-weight: 600;
+        cursor: pointer;
       }
       
       button:not-disabled button:hover {
         background: #008000;
         border: 1px solid black;
+        cursor: default;
       }
       
       :disabled {
         cursor: not-allowed;
         opacity: 0.5;
+      }
+
+      footer {
+        width: 100%;
+        background: #012B55;
+        color: #ffffffde;
+        padding: 8px 10px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        font-size: 12px;
+        height: 3em;
       }
       
     </style>
