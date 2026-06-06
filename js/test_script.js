@@ -18,7 +18,6 @@ const secDivNode = document.getElementById("sec-div");
 const menuNode = document.getElementById("menu");
 
 const questions = /*JSON.parse(LZString.decompress(sessionStorage.getItem('questions'))) || */qns;
-//console.log(questions);
 const mapping = { "physics": "p", "chemistry": "c", "mathematics": "m", "mcq": "a", "numerical": "b" }
 const choice = []; //it contains objects of type {id, response, time} for each question attempted/viewed by the student. response is either option number for mcq or input string for numerical type
 let review = [];   //it contains ids of questions marked for review
@@ -29,7 +28,7 @@ let currentq = {};  //it stores the currently displayed question object
 let startTime;      //it stores the time at which the current question is displayed. It is used to calculate the time spent on each question.
 let intervalId2;    //it stores the interval id for question stopwatch so that it can be cleared when question is changed.
 let menuOpen = false;  //it stores the state of menu (open or closed). not in use currently.
-currentq.id = "1";   //initially displaying question 1
+currentq.id = 1;   //initially displaying question 1
 
 
 //to start the stopwatch for the entire test duration 
@@ -69,7 +68,7 @@ function qStopwatch(startTimer = 0) {
   const timerNode = document.getElementById("q-timer");
   intervalId2 = setInterval(() => {
     startTimer += 1;
-    sec = startTimer;
+    sec = startTimer % 60;
     min = Math.floor(startTimer / 60);
     min = min % 60;
     sec = startTimer - (min * 60);
@@ -84,7 +83,7 @@ function qStopwatch(startTimer = 0) {
     }
   }, 1000);
 
-  sec2 = startTimer;
+  sec2 = startTimer % 60;
   min2 = Math.floor(startTimer / 60);
   min2 = min2 % 60;
   sec2 = startTimer - (min2 * 60);
@@ -123,7 +122,7 @@ function displayQuestion(i) {
   startTime = Date.now();
 
   // check if the question has been viewed before
-  const p = choice.find(e => e.id == q.id);
+  const p = choice.find(e => e.id === q.id);
 
   // if it's a mcq question
   if (q.type == "mcq") {
@@ -132,7 +131,7 @@ function displayQuestion(i) {
 
     // display the options
     oDivNode.style.display = "";
-    [...oDivNode.querySelectorAll("p")].forEach((e, index) => { e.innerHTML = `${index}: ${q.options[index]}`; });
+    [...oDivNode.querySelectorAll("p")].forEach((e, index) => { e.innerHTML = `${q.options[index]}`; });
 
     // if the question has been viewed before and has a response, select that response option 
     // or else make sure no option is selected and question is not marked for review
@@ -166,7 +165,7 @@ function displayQuestion(i) {
   clearInterval(intervalId2);
   
   // if the question has been viewed before, start the stopwatch from the time already spent on that question or else from 0
-  qstopwatch(p ? p.time : 0);
+  qStopwatch(p ? p.time : 0);
 
   // get the subject name from current question in form of: ma, mb, pa, pb, ca, cb. 
   const SUBJECT_NAME = `${mapping[q.subject]}${mapping[q.type]}`;
@@ -201,7 +200,7 @@ function displayQuestion(i) {
 }
 
 function save() {
-  const q = choice.find(e => e.id == currentq.id);
+  const q = choice.find(e => e.id === currentq.id);
   let responseValue = null;
 
   if (currentq.type === "mcq") {
@@ -223,7 +222,7 @@ function save() {
 }
 
 function updateTime() {
-  const q = choice.find(e => e.id == currentq.id);
+  const q = choice.find(e => e.id === currentq.id);
   const timeSpent = Math.round((Date.now() - startTime) / 1000);
   if (q) {
     q.time += timeSpent;
@@ -239,9 +238,10 @@ function updateTime() {
   if (window.matchMedia("screen and (min-width: 200px)").matches) MENU.updateQuestionBox(currentq.id);
 }
 
-// TODO
 function submit() {
-  window.location.href = "index.html";
+  sessionStorage.setItem('responses', JSON.stringify(choice));
+  sessionStorage.setItem('review', JSON.stringify(review));
+  window.location.href = "result.html";
 }
 
 // function handleOutsideMenuClick(e) {
@@ -433,7 +433,6 @@ function getSubjectInitial() {
   const ca = questions.find(e => (e.subject == "chemistry" && e.type == "mcq"))?.id;
   const cb = questions.find(e => (e.subject == "chemistry" && e.type == "numerical"))?.id;
 
-  console.log(ma, mb, pa, pb, ca, cb);
   Object.entries({ ma, mb, pa, pb, ca, cb }).forEach(([name, value]) => {
     document.getElementById(name)?.addEventListener("click", () => {
       updateTime();
