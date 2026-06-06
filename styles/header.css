@@ -317,7 +317,7 @@ footer a {
   margin: 0 0 0px 0;
   font-size: 15px;
   font-family: 'Inter', sans-serif;
-  color: var(--headertext);
+  color: var(--ptext);
   text-decoration: none;
 }
 

@@ -111,30 +111,50 @@ function keyboardinput(id) {
 
 function displayQuestion(i) {
   const q = questions.find(e => e.id == i);
+
+  // if question is not found, simply return without any error
+  if (!q) return;
+
   currentq = q;
-  console.log(q);
   idNode.innerText = q.id;
   qDivNode.innerHTML = q.question;
+
+  // start the stopwatach for the question
   startTime = Date.now();
+
+  // check if the question has been viewed before
   const p = choice.find(e => e.id == q.id);
 
+  // if it's a mcq question
   if (q.type == "mcq") {
+    // hide the keyboards
     nDivNode.style.display = "none";
+
+    // display the options
     oDivNode.style.display = "";
-    // console.log([...oDivNode.querySelectorAll("p")]);
-    //  console.log("pDiv:", pDiv);
     [...oDivNode.querySelectorAll("p")].forEach((e, index) => { e.innerHTML = `${index}: ${q.options[index]}`; });
+
+    // if the question has been viewed before and has a response, select that response option 
+    // or else make sure no option is selected and question is not marked for review
     if (p && [0, 1, 2, 3].includes(p.response)) {  //console.log(index, ":", q.options[index]);
       res = p.response;
       oDivNode.children[p.response].click();
     } else {
       res = null;
-      if (pDiv) pDiv.classList.remove("clicked");
+      pDiv?.classList.remove("clicked");
       pDiv = null;
     }
+
   } else {
+    // if it's a numerical type question
+
+    // hide the options
     oDivNode.style.display = "none";
+
+    // display the keyboards
     nDivNode.style.display = "";
+
+    // if the question has been viewed before and has a response, display that response in the input box
     if (p) {
       nInputNode.innerText = p.response !== null ? p.response : "";
     } else {
@@ -142,29 +162,37 @@ function displayQuestion(i) {
     }
   }
 
+  // clear previous question stopwatch and start a new stopwatch for the current question 
   clearInterval(intervalId2);
-  if (p) {
-    qStopwatch(p.time);
-  } else {
-    qStopwatch(0);
-  }
+  
+  // if the question has been viewed before, start the stopwatch from the time already spent on that question or else from 0
+  qstopwatch(p ? p.time : 0);
 
-  const subName = `${mapping[q.subject]}${mapping[q.type]}`;
+  // get the subject name from current question in form of: ma, mb, pa, pb, ca, cb. 
+  const SUBJECT_NAME = `${mapping[q.subject]}${mapping[q.type]}`;
 
-  if (subName !== previousSubName) {
+  // if the current question belongs to a different subject than the previous question
+  if (SUBJECT_NAME !== previousSubName) {
+    // remove the active class from the previous subject
     document.getElementById(previousSubName).classList.remove("active");
-    document.getElementById(subName).classList.add("active");
-    previousSubName = subName;
+
+    // add the active class to the current subject
+    document.getElementById(SUBJECT_NAME).classList.add("active");
+
+    // set current subject as previous subject for the next iteration
+    previousSubName = SUBJECT_NAME;
   }
 
   MENU.toggleCurrentClass(currentq.id);
 
+  // if current question is last question, disable the next button or else keep it enabled
   if (q.id == questions.length) {
     nextNode.disabled = true;
   } else {
     nextNode.disabled = false;
   }
-
+  
+  // if current question is first question, disable the back button or else keep it enabled
   if (q.id == 1) {
     backNode.disabled = true;
   } else {
