@@ -89,6 +89,14 @@
             color: var(--ptext);
             font-weight: 600;
             opacity: 0.9;
+            letter-spacing: 0.05em;
+        }
+
+        .card-marks span {
+            font-weight: 500; 
+            margin-left: 10px; 
+            color: var(--ptext); 
+            opacity: 0.5;
         }
 
         .card-name {
@@ -138,18 +146,18 @@
 
         @media screen and (min-width: 500px) {
             section {
-                width: 800px;
-                max-width: 100%;
+                /*     width: 800px;
+                max-width: 100%;*/
                 margin: 50px auto;
-                background-color: bisque;
-                border: 1px solid;
             }
 
             .card-section {
                 gap: 20px;
             }
-            
+
             #result-div {
+                max-width: 1500px;
+                margin: auto;
                 display: flex;
                 gap: 0;
             }
@@ -159,14 +167,13 @@
             }
 
             #total-result-section {
-                flex-basis: 25%;
+                flex-basis: 30%;
             }
 
             #total-result {
                 padding-right: 0px;
-                max-width: 267px;
+                /*   max-width: 267px;*/
             }
-
         }
     </style>
 
@@ -181,7 +188,7 @@
                         <div class="card-number">59/75</div>
                         <div class="card-number-lbl"></div>
                     </div>
-                    <div class="card-marks">+176 / 300</div>
+                    <div class="card-marks">+176 / 300 <span>Marks</span></div>
                     <div class="card-name">TOTAL</div>
                 </div>
                 <div class="card temp" style="visibility: hidden;">
@@ -201,7 +208,7 @@
                         <div class="card-number">47</div>
                         <div class="card-number-lbl">Qs</div>
                     </div>
-                    <div class="card-marks">+188</div>
+                    <div class="card-marks">+188<span>Marks</span></div>
                     <div class="card-name">CORRECT</div>
                 </div>
                 <div class="card">
@@ -210,7 +217,7 @@
                         <div class="card-number">12</div>
                         <div class="card-number-lbl">Qs</div>
                     </div>
-                    <div class="card-marks">-12</div>
+                    <div class="card-marks">-12<span>Marks</span></div>
                     <div class="card-name">INCORRECT</div>
                 </div>
                 <div class="card">
@@ -219,7 +226,7 @@
                         <div class="card-number">16</div>
                         <div class="card-number-lbl">Qs</div>
                     </div>
-                    <div class="card-marks">0</div>
+                    <div class="card-marks">0<span>Marks</span></div>
                     <div class="card-name">UNATTEMPTED</div>
                 </div>
 

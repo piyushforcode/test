@@ -7,7 +7,7 @@ let themeModalOpen = false;
 // Inject header HTML content
 headerNode.innerHTML = `<span class="material-symbols-outlined" id="header-menu" onclick="toggleMenu()" title="menu">menu</span>
 <h1 id="header-title" title="PYQtest" onclick="window.location.assign('index.html')">PYQ<em>test</em></h1>
-<span class="material-symbols-outlined" id="profile" onclick="" title="profile">account_circle</span>
+<span class="material-symbols-outlined" id="profile" title="profile" onclick="window.location.assign('result.html')">account_circle</span>
 `;
 
 // Inject footer HTML content
@@ -46,9 +46,6 @@ menuModalNode.innerHTML = `<div id="menu">
     </div>
     <div class="option">
       <div>Terms & Conditions</div>
-    </div>
-    <div class="option" onclick="window.location.assign('result.html')">
-      <div>Result</div>
     </div>
     <div class="option last-option" onclick="window.location.assign('about.html')">
       <p>About Us</p>
