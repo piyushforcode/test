@@ -1,27 +1,235 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle,close,filter_list,menu&display=block" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle,close,filter_list,menu&display=block" />
     <link rel="stylesheet" href="styles/header.css" type="text/css">
-    <script src="js/header.js" defer></script> 
+    <script src="js/header.js" defer></script>
+    <script>
+        // Apply saved or default theme on load
+        const THEME_NAME = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", `${THEME_NAME}`);
+    </script>
 </head>
+
 <body>
     <header></header>
 
-    
+    <style>
+        section {
+            width: 100%;
+            margin: 50px 0 0 0;
+        }
+
+        h2 {
+            display: block;
+            color: var(--h3);
+            margin-left: 20px;
+            position: relative;
+            z-index: 0;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .card-section {
+            display: flex;
+            gap: 10px;
+            padding: 24px 22px 0;
+        }
+
+        .card {
+            flex: 1;
+            border-radius: 14px;
+            background: var(--accent);
+            border: 1px solid var(--border);
+            padding: 12px;
+            position: relative;
+        }
+
+        .card-time {
+            color: var(--stext);
+            border: 1px dashed var(--stext);
+            border-radius: 14px;
+            padding: 2px 8px;
+            width: fit-content;
+            font-size: small;
+            justify-self: flex-end;
+            align-self: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .card-number {
+            color: var(--brand);
+            font-family: 'Fraunces', serif;
+            font-size: 35px;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .card-number-lbl {
+            color: var(--ptext);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 5px;
+            opacity: 0.5;
+            align-self: last baseline;
+        }
+
+        .card-marks {
+            margin-top: 15px;
+            color: var(--ptext);
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .card-name {
+            position: absolute;
+            bottom: -24px;
+            color: var(--ptext);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
 
 
 
+        #total-result .card {
+            padding: 0;
+            background: var(--brand);
+            border: none
+        }
 
+        #total-result .card-time {
+            color: var(--ttext);
+            margin: 12px 12px 15px;
+        }
 
+        #total-result .card-number {
+            color: var(--bgcolor);
+            margin: 0 12px;
+        }
 
+        #total-result .card-marks {
+            margin: 12px 0 0;
+            padding: 5px 12px 12px;
+            /* 12+5=17 => 15 (margin-top) + 1 (card border) + 1 (card border) = 17 */
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            color: var(--ptext);
+            background: var(--accent);
+            opacity: 1;
+        }
 
+        #total-result .card-name {
+            padding-left: 12px;
+        }
 
+        @media screen and (min-width: 500px) {
+            section {
+                width: 800px;
+                max-width: 100%;
+                margin: 50px auto;
+                background-color: bisque;
+                border: 1px solid;
+            }
 
+            .card-section {
+                gap: 20px;
+            }
+            
+            #result-div {
+                display: flex;
+                gap: 0;
+            }
+
+            .temp {
+                display: none;
+            }
+
+            #total-result-section {
+                flex-basis: 25%;
+            }
+
+            #total-result {
+                padding-right: 0px;
+                max-width: 267px;
+            }
+
+        }
+    </style>
+
+    <div id="result-div">
+        <section id="total-result-section">
+            <h2>TOTAL RESULT</h2>
+
+            <div id="total-result" class="card-section">
+                <div class="card">
+                    <div class="card-time">02:53:59</div>
+                    <div style="display: flex; gap: 10px;">
+                        <div class="card-number">59/75</div>
+                        <div class="card-number-lbl"></div>
+                    </div>
+                    <div class="card-marks">+176 / 300</div>
+                    <div class="card-name">TOTAL</div>
+                </div>
+                <div class="card temp" style="visibility: hidden;">
+                </div>
+                <div class="card temp" style="visibility: hidden;">
+                </div>
+            </div>
+
+        </section>
+        <section id="overall-result-section">
+            <h2>OVERALL RESULT</h2>
+
+            <div id="overall-result" class="card-section">
+                <div class="card">
+                    <div class="card-time">01:15:35</div>
+                    <div style="display: flex; gap: 10px;">
+                        <div class="card-number">47</div>
+                        <div class="card-number-lbl">Qs</div>
+                    </div>
+                    <div class="card-marks">+188</div>
+                    <div class="card-name">CORRECT</div>
+                </div>
+                <div class="card">
+                    <div class="card-time">00:47:56</div>
+                    <div style="display: flex; gap: 10px;">
+                        <div class="card-number">12</div>
+                        <div class="card-number-lbl">Qs</div>
+                    </div>
+                    <div class="card-marks">-12</div>
+                    <div class="card-name">INCORRECT</div>
+                </div>
+                <div class="card">
+                    <div class="card-time">00:50:28</div>
+                    <div style="display: flex; gap: 10px;">
+                        <div class="card-number">16</div>
+                        <div class="card-number-lbl">Qs</div>
+                    </div>
+                    <div class="card-marks">0</div>
+                    <div class="card-name">UNATTEMPTED</div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+
+    <div style="height: 100vh;"></div>
     <footer></footer>
 </body>
+
 </html>

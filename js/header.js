@@ -47,6 +47,9 @@ menuModalNode.innerHTML = `<div id="menu">
     <div class="option">
       <div>Terms & Conditions</div>
     </div>
+    <div class="option" onclick="window.location.assign('result.html')">
+      <div>Result</div>
+    </div>
     <div class="option last-option" onclick="window.location.assign('about.html')">
       <p>About Us</p>
     </div>
