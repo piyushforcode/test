@@ -93,9 +93,9 @@
         }
 
         .card-marks span {
-            font-weight: 500; 
-            margin-left: 10px; 
-            color: var(--ptext); 
+            font-weight: 500;
+            margin-left: 10px;
+            color: var(--ptext);
             opacity: 0.5;
         }
 
@@ -110,8 +110,6 @@
             margin-top: 5px;
             opacity: 0.9;
         }
-
-
 
         #total-result .card {
             padding: 0;
@@ -146,8 +144,6 @@
 
         @media screen and (min-width: 500px) {
             section {
-                /*     width: 800px;
-                max-width: 100%;*/
                 margin: 50px auto;
             }
 
@@ -172,8 +168,92 @@
 
             #total-result {
                 padding-right: 0px;
-                /*   max-width: 267px;*/
             }
+        }
+
+        #question-section {
+            background: white;
+            overflow: scroll;
+        }
+
+        .bar-graph-div {
+            display: flex;
+            gap: auto;
+            background-color: beige;
+            height: 300px;
+            padding: 24px 0 0;
+            margin: 0 22px 24px 22px;
+            border-bottom: 1px solid;
+            border-left: 1px solid;
+        }
+
+        .bar {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-left: 50px;
+            width: 70px;
+            min-width: fit-content;
+            position: relative;
+            align-self: flex-end;
+        }
+
+        .bar-correct {
+            background-color: green;
+        }
+
+        .bar-incorrect {
+            background-color: red;
+        }
+        
+        .physics {
+            background-color: brown;
+            height: calc(2400/25 * 1%);
+        }
+
+        .physics .bar-incorrect {
+            height: calc();
+        }
+        
+        .chemistry {
+            background-color: aqua;
+            height: calc(2000/25 * 1%);
+        }
+
+        .chemistry .bar-incorrect {
+            height: calc(1900/20 * 25%);
+        }
+
+        .mathematics {
+            background-color: chartreuse;
+            height: calc(1600/25 * 1%);
+        }
+
+        .chemistry .bar-incorrect {
+            height: calc(1200/25 * 1%);
+        }
+
+        .bar-attempted-question {
+            position: absolute;
+            top: -24px;
+            color: var(--stext);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            margin: 5px 0 0;
+            opacity: 0.9;
+        }
+
+        .bar-subject-name {
+            position: absolute;
+            bottom: -24px;
+            color: var(--ptext);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin: 5px 0 0;
+            opacity: 0.9;
         }
     </style>
 
@@ -235,6 +315,32 @@
         </section>
     </div>
 
+    <div id="distribution-div">
+        <section id="question-section">
+            <h2>QUESTION</h2>
+
+            <div class="bar-graph-div">
+                <div class="bar physics">
+                    <p class="bar-attempted-question">24 Qs</p>
+                    <div class="bar-correct">22 Qs</div>
+                    <div class="bar-incorrect">2 Qs</div>
+                    <h4 class="bar-subject-name">Physics</h4>
+                </div>
+                <div class="bar chemistry">
+                    <p class="bar-attempted-question">20 Qs</p>
+                    <div class="bar-correct">19 Qs</div>
+                    <div class="bar-incorrect">1 Qs</div>
+                    <h4 class="bar-subject-name">Chemistry</h4>
+                </div>
+                <div class="bar mathematics">
+                    <p class="bar-attempted-question">16 Qs</p>
+                    <div class="bar-correct">12 Qs</div>
+                    <div class="bar-incorrect">4 Qs</div>
+                    <h4 class="bar-subject-name">Mathematics</h4>
+                </div>
+            </div>
+        </section>
+    </div>
     <div style="height: 100vh;"></div>
     <footer></footer>
 </body>
