@@ -12,6 +12,8 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle,close,filter_list,menu&display=block" />
     <link rel="stylesheet" href="styles/header.css" type="text/css">
     <script src="js/header.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
     <script>
         // Apply saved or default theme on load
         const THEME_NAME = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
@@ -172,14 +174,12 @@
         }
 
         #question-section {
-            background: white;
             overflow: scroll;
         }
 
         .bar-graph-div {
             display: flex;
             gap: auto;
-            background-color: beige;
             height: 300px;
             padding: 24px 0 0;
             margin: 0 22px 24px 22px;
@@ -200,37 +200,46 @@
 
         .bar-correct {
             background-color: green;
+            color: white;
+            font-size: small;
+            flex: 1;
+            padding: 5px;
+            overflow: hidden;
         }
 
         .bar-incorrect {
             background-color: red;
+            color: white;
+            font-size: small;
+            padding: 5px;
+            overflow: hidden;
         }
-        
+
         .physics {
             background-color: brown;
-            height: calc(2400/25 * 1%);
+            height: calc(24/25 * 276px);
         }
 
         .physics .bar-incorrect {
-            height: calc();
+            height: calc(2/25 * 276px);
         }
-        
+
         .chemistry {
             background-color: aqua;
-            height: calc(2000/25 * 1%);
+            height: calc(20/25 * 276px);
         }
 
         .chemistry .bar-incorrect {
-            height: calc(1900/20 * 25%);
+            height: calc(1/25 * 276px);
         }
 
         .mathematics {
             background-color: chartreuse;
-            height: calc(1600/25 * 1%);
+            height: calc(16/25 * 276px);
         }
 
-        .chemistry .bar-incorrect {
-            height: calc(1200/25 * 1%);
+        .mathematics .bar-incorrect {
+            height: calc(4/25 * 276px);
         }
 
         .bar-attempted-question {
@@ -254,6 +263,17 @@
             text-transform: uppercase;
             margin: 5px 0 0;
             opacity: 0.9;
+        }
+
+        .pie-chart-div {
+            padding: 24px 22px 0;
+        }
+
+        #pie-chart-time {
+            width: 100px;
+            height: 100px;
+            background: conic-gradient(red);
+            border-radius: 100%;
         }
     </style>
 
@@ -321,7 +341,7 @@
 
             <div class="bar-graph-div">
                 <div class="bar physics">
-                    <p class="bar-attempted-question">24 Qs</p>
+                    <p class="bar-attempted-question">25 Qs</p>
                     <div class="bar-correct">22 Qs</div>
                     <div class="bar-incorrect">2 Qs</div>
                     <h4 class="bar-subject-name">Physics</h4>
@@ -340,7 +360,19 @@
                 </div>
             </div>
         </section>
+
+        <section id="time-section">
+            <h2>TIME</h2>
+
+            <div class="pie-chart-div">
+                <div id="pie-chart-time">
+
+                </div>
+
+            </div>
+        </section>
     </div>
+
     <div style="height: 100vh;"></div>
     <footer></footer>
 </body>
